@@ -11,14 +11,22 @@ import { LoadingContext } from "../context/context";
 function Login() {
   const navigate = useNavigate();
 
+  // Loading context
   const { loading } = useContext(LoadingContext);
 
+  // Google auth provider
   const provider = new GoogleAuthProvider();
 
+  /**
+   * Function to handle signin button click
+   */
   const handleClick = () => {
     signInWithRedirect(auth, provider);
   };
 
+  /**
+   * Runs on initial load of component and when the loading context changes
+   */
   useEffect(() => {
     getRedirectResult(auth).then((user) => {
       if (user) {
@@ -27,6 +35,7 @@ function Login() {
     });
   }, [loading, navigate]);
 
+  // If loading is true return please wait text
   if (loading) {
     return <div>Please wait...</div>;
   }

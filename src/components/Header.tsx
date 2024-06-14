@@ -7,8 +7,12 @@ import { useNavigate } from "react-router-dom";
 function Header() {
   const navigate = useNavigate();
 
+  // Auth context
   const { authData } = useContext(AuthContext);
 
+  /**
+   * Function to handle signout click
+   */
   const handleSignoutClick = () => {
     signOut(auth);
     navigate("/login");

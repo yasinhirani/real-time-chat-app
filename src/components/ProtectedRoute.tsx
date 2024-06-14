@@ -7,8 +7,12 @@ import { LoadingContext } from "../context/context";
 function ProtectedRoute({ Children }: { Children: React.FC }) {
   const navigate = useNavigate();
 
+  // Loading context
   const { loading } = useContext(LoadingContext);
 
+  /**
+   * Runs on initial load of component and check whether the user is authenticated ot not
+   */
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (!currentUser) {

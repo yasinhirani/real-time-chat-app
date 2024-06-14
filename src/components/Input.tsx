@@ -5,10 +5,14 @@ import { AuthContext } from "../context/context";
 import { serverTimestamp } from "firebase/database";
 
 function Input() {
+  // Auth context
   const { authData } = useContext(AuthContext);
 
   const [message, setMessage] = useState<string>("");
 
+  /**
+   * Function to handle send message click and add message to firebase database
+   */
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     set(ref(database, `messages/${crypto.randomUUID()}`), {

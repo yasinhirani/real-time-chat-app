@@ -5,12 +5,17 @@ import { AuthContext } from "../context/context";
 import { IChats } from "../models/chats.model";
 
 function Chats() {
+  // Auth context
   const { authData } = useContext(AuthContext);
 
   const [messages, setMessages] = useState<IChats[] | null>(null);
 
+  // Ref to send scroll to bottom of page on new message
   const messageEndRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * Runs on initial load of component
+   */
   useEffect(() => {
     onValue(ref(database, "messages"), (snapshot) => {
       if (snapshot.val()) {
@@ -22,6 +27,9 @@ function Chats() {
     });
   }, []);
 
+  /**
+   * Runs on initial load of component and when the messages changes
+   */
   useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView();
